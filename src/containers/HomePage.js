@@ -5,8 +5,13 @@ export default class HomePage extends Component {
     super(props);
     this.state = {
       login: false,
+      id: 0,
       name: '',
+      pictureUrl: '',
     };
+    this.didLogin = this.didLogin.bind(this);
+    this.didNotLogin = this.didNotLogin.bind(this);
+    this.statusChangeCallback = this.statusChangeCallback.bind(this);
   }
   componentDidMount() {
     window.fbAsyncInit = () => {
@@ -17,13 +22,13 @@ export default class HomePage extends Component {
         version: 'v2.9',
       });
       window.FB.AppEvents.logPageView();
-      window.FB.Event.subscribe('auth.statusChange', this.statusChangeCallback);
+      window.FB.Event.subscribe('auth.login', this.statusChangeCallback);
     };
     (function(d, s, id){
       var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
+      if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/sdk.js";
+      js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.9&appId=1743200029028560";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   }
@@ -31,9 +36,18 @@ export default class HomePage extends Component {
     window.FB.api('/me', (res) => {
       this.setState({
         login: true,
+        id: res.id,
         name: res.name,
       });
     });
+    window.FB.api('/me/picture', (res) => {
+      this.setState({
+        pictureUrl: res.data.url,
+      });
+      this.props.setUserInfo(this.state.login, this.state.id, this.state.name, this.state.pictureUrl);
+    });
+    // console.log(this.state.login, this.state.id, this.state.name, this.state.pictureUrl);
+    // this.props.setUserInfo(this.state.login, this.state.id, this.state.name, this.state.pictureUrl);
   }
   didNotLogin() {
     this.props.setState({
@@ -42,48 +56,42 @@ export default class HomePage extends Component {
     });
   }
   statusChangeCallback(response) {
+    console.log(response);
     if (response.status === 'connected') {
       this.didLogin();
-    } else {
+      // window.location = '/quiz';
+    } else { // else 後用不到，我們無法登出FB，以防萬一留著
       this.didNotLogin();
     }
   }
-  checkLoginState() {
-    window.FB.getLoginStatus(function(response) {
-      this.statusChangeCallback(response);
-    });
-  }
+
   loginSection() {
-    if (this.state.login === false) {
-      return (
-        <div
-          className="fb-login-button"
-          data-max-rows="1"
-          data-size="medium"
-          data-button-type="continue_with"
-          data-show-faces="false"
-          data-auto-logout-link="false"
-          data-use-continue-as="true"
-        />
+    let section = {};
+    if (this.state.login === true) {
+      section = (
+        <div>Hi, {this.state.name}</div>
       );
     } else {
-      return (
-        <a className="btn cyan">Hi, {this.state.name}</a>
+      section = (
+        <div>
+          <div
+            className="fb-login-button"
+            data-max-rows="1"
+            data-size="large"
+            data-button-type="continue_with"
+            data-show-faces="false"
+            data-auto-logout-link="false"
+            data-use-continue-as="false"
+          />
+        </div>
       );
     }
+    return section;
   }
   render() {
     return (
       <div>
-        <div
-          className="fb-login-button"
-          data-max-rows="1"
-          data-size="large"
-          data-button-type="login_with"
-          data-show-faces="false"
-          data-auto-logout-link="true"
-          data-use-continue-as="false"
-        />
+        {this.loginSection()}
       </div>
     );
   }

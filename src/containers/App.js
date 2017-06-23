@@ -13,23 +13,39 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      login: false,
+      id: 0,
+      name: '',
+      pictureUrl: '',
     };
+    this.setUserInfo = this.setUserInfo.bind(this);
+  }
+  setUserInfo(login, id, name, pictureUrl) {
+    this.setState({
+      login,
+      id,
+      name,
+      pictureUrl,
+    });
+    console.log(login, id, name, pictureUrl);
+  }
+  homePage() {
+    return (
+      <HomePage setUserInfo={this.setUserInfo} />
+    );
   }
   render() {
     return (
       <MuiThemeProvider>
         <div>
           <Header />
-          <Body />
+          <Switch>
+            <Route exact path="/" component={() => this.homePage()} />
+            <Route exact path="/quiz" component={QuizPage} />
+          </Switch>
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-const Body = () => (
-  <Switch>
-    <Route exact path="/" component={HomePage} />
-    <Route exact path="/quiz" component={QuizPage} />
-  </Switch>
-);
