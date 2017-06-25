@@ -9,12 +9,17 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "history": "^4.6.3",
     "material-ui": "^0.18.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
-    "react-tap-event-plugin": "^2.0.1"
+    "react-router-redux": "next",
+    "react-tap-event-plugin": "^2.0.1",
+    "redux": "^3.7.0",
+    "redux-auth": "^0.0.5-beta5"
   },
   "devDependencies": {
     "eslint": "3.19.0",

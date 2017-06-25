@@ -3,6 +3,15 @@
    margin: 0 !important;
 }
 
+.home-page {
+  height: 100%;
+  width: 100%;
+}
+
+.login-btn-center {
+  right: 0%;
+}
+
 .App {
   text-align: center;
 }
