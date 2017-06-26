@@ -1,4 +1,4 @@
-import User from './dbModel';
+const User = require('./dbModel');
 
 module.exports = {
     postUser(req, res){

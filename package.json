@@ -8,6 +8,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "body-parser": "^1.17.2",
     "bootstrap": "^3.3.7",
     "chart.js": "^2.6.0",
