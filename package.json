@@ -16,13 +16,14 @@
     "material-ui": "^0.18.3",
     "mongoose": "^4.11.0",
     "react": "^15.6.1",
+    "react-chartjs": "^0.8.0",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.7.0",
+    "redux": "^3.7.1",
     "redux-auth": "^0.0.5-beta5"
   },
   "devDependencies": {
