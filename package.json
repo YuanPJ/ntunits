@@ -22,7 +22,7 @@
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-tap-event-plugin": "^2.0.1",
-    "redux": "^3.7.0",
+    "redux": "^3.7.1",
     "redux-auth": "^0.0.5-beta5"
   },
   "devDependencies": {
