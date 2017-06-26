@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyparser = require('body-parser');
-const api = require('./api/api')
-
+const router = require('./api/route')
+const mongoose = require('mongoose');
 const server = express();
 
 server.use(bodyparser.json());
-server.use('/api',api)
+server.use('/api',router)
 
 //====================================//
 mongoose.Promise = global.Promise;
@@ -23,4 +23,4 @@ db.once('open', function () {
 //====================================//
 
 const port = process.env.PORT || 3001;
-app.listen(port, ()=>{console.log(`listening on ${port}...`)});
+server.listen(port, ()=>{console.log(`listening on ${port}...`)});
