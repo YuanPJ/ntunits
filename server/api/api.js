@@ -24,5 +24,9 @@ module.exports = {
         const all = User.find({}, {answer: 1, _id: 0})
         const array = all.map(x => {x.answer[id]})
         res.json({answer: array})
+    },
+    getQuiz(req, res){
+        console.log("get quiz");
+        res.json(data);
     }
 }
