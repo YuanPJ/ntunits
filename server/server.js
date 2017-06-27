@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const server = express();
 
 server.use(bodyparser.json());
-server.use(express.static(__dirname+'/public'))
+server.use(express.static(__dirname+'/../public'))
+server.get('/', (req,res)=>{res.sendFile(__dirname+'../public/index.html')})
 server.use('/api',router)
 
 //====================================//
