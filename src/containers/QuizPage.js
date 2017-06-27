@@ -12,18 +12,18 @@ export default class QuizPage extends Component {
     this.state = {
       openDialog: false,
       number: 0,
-      data: [],
+      data: {},
     };
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleOpen(i) {
-    fetch('/api/getQuiz')
+    fetch('/api/quiz')
       .then(res => res.json())
-      .then(data => this.setState({ data }))
-      .catch(err => console.log(err));
-      console.log(this.state.data);
+      .then((data) => { this.setState({ data }); })
+      .catch((err) => { console.log(err); });
     this.setState({ openDialog: true, number: i+1 });
+    console.log(this.state.data);
   }
 
   handleClose() {
