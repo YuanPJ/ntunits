@@ -45,8 +45,11 @@ export default class QuizPage extends Component {
       .then(res => res.json())
       .then((quiz) => { this.setState({ data: quiz }); })
       .catch((err) => { console.log('fetch get quiz error', err); });
-    this.setState({ openDialog: true, number: i });
-
+    if (this.state.user.answer[i] === 0) {
+      this.setState({ openDialog: true, number: i });
+    } else {
+      this.setState({ openChart: true, number: i });
+    }
     fetch(`/api/user/${this.props.id}`)
       .then(res => res.json())
       .then(user => this.setState({ user }))
@@ -55,7 +58,11 @@ export default class QuizPage extends Component {
   }
 
   handleClose() {
-    this.setState({ openDialog: false });
+    this.setState({
+      openDialog: false,
+      openChart: false,
+      checked: [false, false, false, false, false],
+    });
   }
 
   handleCheck(i) {
@@ -75,20 +82,18 @@ export default class QuizPage extends Component {
         allNotChecked = 0;
       }
     }
-    console.log('allNotChecked: ', allNotChecked);
     if (allNotChecked === 1) {
       alert('you must choose one!');
       return;
     }
+
     const answer = this.state.user.answer;
-    const id = this.props.id;
     for (let i = 0; i < 5; i++) {
       if (this.state.checked[i] === true) {
         answer[this.state.number] = i + 1;
       }
     }
-    console.log('userID', id)
-    fetch(`/api/user/${id}`, {
+    fetch(`/api/user/${this.props.id}`, {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -100,15 +105,20 @@ export default class QuizPage extends Component {
     })
       .then(res => res.json())
       .catch((err) => { console.log('fetch put answer error', err); });
-    this.setState({ openDialog: false, openChart: true });
+    this.setState({
+      openDialog: false,
+      openChart: true,
+      checked: [false, false, false, false, false],
+    });
   }
 
   render() {
-    console.log('quizpage state', this.state);
+    console.log('quizpage state user', this.state.user);
     console.log('quizpage props', this.props);
     const n = 12;
     const list = Array.from(Array(n).keys());
     const listOptions = Array.from(Array(5).keys());
+    const num = this.state.number;
     const actions = [
       <FlatButton
         label="Cancel"
@@ -126,7 +136,7 @@ export default class QuizPage extends Component {
     return (
       <div className="container-fluid">
         <Dialog
-          title={this.state.data[this.state.number].question}
+          title={this.state.data[num].question}
           actions={actions}
           modal={false}
           open={this.state.openDialog}
@@ -135,7 +145,7 @@ export default class QuizPage extends Component {
         >
           {listOptions.map(i =>
             (<Checkbox
-              label={this.state.data[this.state.number].options[i]}
+              label={this.state.data[num].options[i]}
               key={`quizoptions-${i}`}
               onCheck={() => this.handleCheck(i)}
               checked={this.state.checked[i]}
@@ -144,13 +154,13 @@ export default class QuizPage extends Component {
         </Dialog>
 
         <Dialog
-          title={this.state.data[this.state.number].question}
+          title={this.state.data[num].question}
           modal={false}
           open={this.state.openChart}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <BarChart number={this.state.number} />
+          <BarChart num={num} data={this.state.data[num].options} />
         </Dialog>
 
         <div className="row">
