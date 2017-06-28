@@ -14,6 +14,7 @@ export default class QuizPage extends Component {
       openDialog: false,
       openChart: false,
       number: 0,
+      checked: [false, false, false, false, false],
       data: [
         { question: '', options: [''] },
         { question: '', options: [''] },
@@ -36,6 +37,7 @@ export default class QuizPage extends Component {
         answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
     };
     this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleOpen(i) {
@@ -56,12 +58,56 @@ export default class QuizPage extends Component {
     this.setState({ openDialog: false });
   }
 
+  handleCheck(i) {
+    const checked = this.state.checked;
+    for (let j = 0; j < 5; j++) {
+      if (i === j) {
+        checked[j] = true;
+      } else { checked[j] = false; }
+    }
+    this.setState({ checked });
+  }
+
+  handleSubmit() {
+    let allNotChecked = 1;
+    for (let i = 0; i < 5; i++) {
+      if (this.state.checked[i] === true) {
+        allNotChecked = 0;
+      }
+    }
+    console.log('allNotChecked: ', allNotChecked);
+    if (allNotChecked === 1) {
+      alert('you must choose one!');
+      return;
+    }
+    const answer = this.state.user.answer;
+    const id = this.state.user.userID;
+    for (let i = 0; i < 5; i++) {
+      if (this.state.checked[i] === true) {
+        answer[this.state.number] = i + 1;
+      }
+    }
+    fetch(`/api/user/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        answer,
+      }),
+    })
+      .then(res => res.json())
+      .catch((err) => { console.log('fetch put answer error', err); });
+    this.setState({ openDialog: false, openChart: true });
+  }
+
   render() {
     console.log('quizpage state', this.state.data);
     console.log('quizpage props', this.props);
     const n = 12;
     const list = Array.from(Array(n).keys());
-    const list_options = Array.from(Array(5).keys());
+    const listOptions = Array.from(Array(5).keys());
     const actions = [
       <FlatButton
         label="Cancel"
@@ -72,9 +118,10 @@ export default class QuizPage extends Component {
         label="Submit"
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.handleSubmit}
       />,
     ];
+
     return (
       <div className="container-fluid">
         <Dialog
@@ -85,21 +132,26 @@ export default class QuizPage extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          {list_options.map(i =>
-            <Checkbox label={this.state.data[this.state.number].options[i]} key={`quizoptions-${i}`} />
+          {listOptions.map(i =>
+            (<Checkbox
+              label={this.state.data[this.state.number].options[i]}
+              key={`quizoptions-${i}`}
+              onCheck={() => this.handleCheck(i)}
+              checked={this.state.checked[i]}
+            />),
           )}
         </Dialog>
+
         <Dialog
           title={this.state.data[this.state.number].question}
-          actions={actions}
           modal={false}
           open={this.state.openChart}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <BarChart />
+          <BarChart number={this.state.number} />
         </Dialog>
-          
+
         <div className="row">
           {list.map(i =>
             (<div className="col-xs-6 col-sm-4 col-md-3 nopadding" key={`quizcell-${i}`}>
