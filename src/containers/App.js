@@ -25,11 +25,11 @@ class App extends Component {
     super(props);
     this.state = this.props.state;
     // this.state = {
-      // login: false,
-      // id: 0,
-      // name: '',
-      // pictureUrl: '',
-      // friends: [],
+    //   login: false,
+    //   id: 0,
+    //   name: '',
+    //   pictureUrl: '',
+    //   friends: []
     // };
     // this.setState(
       // this.props,
@@ -141,14 +141,32 @@ class App extends Component {
       </div>
     );
   }
+  // renderQuizPage() {
+  //   console.log(this.state)
+  //   return <QuizPage 
+  //     login={this.state.login}
+  //     id={this.state.id}
+  //     name={this.state.name}
+  //     pictureUrl={this.state.pictureUrl}
+  //     friends={this.state.friends}/>
+  // }
   render() {
+    console.log(this.state)
+    const renderQuizPage = () => {
+      return <QuizPage       
+        login={this.state.login}
+        id={this.state.id}
+        name={this.state.name}
+        pictureUrl={this.state.pictureUrl}
+        friends={this.state.friends}/>
+    }
     return (
       <MuiThemeProvider>
         <div>
           <Header />
           <Switch>
             <Route exact path="/" component={() => this.homePage()} />
-            <Route exact path="/quiz" component={QuizPage} />
+            <Route exact path="/quiz" component={renderQuizPage} />
           </Switch>
         </div>
       </MuiThemeProvider>

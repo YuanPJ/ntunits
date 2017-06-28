@@ -13,16 +13,25 @@ export default class QuizPage extends Component {
       openDialog: false,
       number: 0,
       data: [{question:"", options:[""]}],
+      user: {userID: "", userName: "", userPicURI: "", friendList: [], answer: [0,0,0,0,0,0,0,0,0,0,0,0,0]}
     };
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleOpen(i) {
+    // console.log(this.props.id)
     fetch('/api/quiz')
       .then(res => res.json())
-      .then((quiz) => { console.log(quiz); this.setState({ data: quiz}); })
-      .catch((err) => { console.log(err); });
+      .then((quiz) => { this.setState({ data: quiz}); })
+      .catch((err) => { console.log('fetch get quiz error',err); });
     this.setState({ openDialog: true, number: i+1 });
+    
+    fetch(`/api/user/${this.props.id}`)
+      .then(res => res.json())
+      .then(user => this.setState({user}))
+      .catch(err => {console.log('fetch get user error',err)})
+
+    console.log('handleOpen state',this.state);
   }
 
   handleClose() {
@@ -30,7 +39,8 @@ export default class QuizPage extends Component {
   }
 
   render() {
-    console.log(this.state.data);
+    console.log('quizpage state',this.state.data);
+    console.log('quizpage props',this.props)
     const n = 13;
     const list = Array.from(Array(n).keys());
     const actions = [
