@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import RaisedButton from 'material-ui/RaisedButton';
 import Header from '../components/Header';
 import QuizPage from './QuizPage';
 import './App.css';
@@ -62,6 +63,7 @@ class App extends Component {
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   }
+
   getFriends(res) {
     const newFriends = [];
     for (let i = 0; i < res.data.size; i += 1) {
@@ -124,11 +126,21 @@ class App extends Component {
       this.didNotLogin();
     }
   }
+
   loginSection() {
     let section = {};
     if (this.state.login === true) {
       section = (
-        <div>Hi, {this.state.name}</div>
+        <div>
+          <div>
+            Hi, {this.state.name}
+          </div>
+          <div>
+            <Link to="/quiz">
+              <RaisedButton label="START" style={{ margin: 12 }} />
+            </Link>
+          </div>
+        </div>
       );
     } else {
       section = (
@@ -164,7 +176,7 @@ class App extends Component {
   //     friends={this.state.friends}/>
   // }
   render() {
-    console.log(this.state)
+    console.log(this.state);
     const renderQuizPage = () => {
       return <QuizPage       
         login={this.state.login}
