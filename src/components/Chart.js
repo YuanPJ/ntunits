@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
-import Chart from 'chart.js';
-import {Bar} from 'react-chartjs-2';
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
 const chartData = {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+  labels: [],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
@@ -38,27 +37,33 @@ const chartOptions = {
 };
 
 export default class BarChart extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      data: {},
-      options: {},
+      labels: ['', '', '', '', ''],
+      options: [],
+      number: this.props.number,
     };
   }
 
-  // componentWillMount() {
-  //   fetch('/api/getQuiz')
-  //     .then(res => res.json())
-  //     .then(data => this.setState({ data }))
-  //     .catch(err => console.log(err));
-  //   console.log("component will mount");
-  // }
-
+  componentWillMount() {
+      const labels = this.state.labels;
+    // fetch('/api/getQuiz')
+    //   .then(res => res.json())
+    //   .then(data => this.setState({ data }))
+    //   .catch(err => console.log(err));
+    // console.log("component will mount");
+    for(let i=0; i<5; i++){
+        labels[i] = this.props.data[i];
+    }
+    this.setState({ labels });
+    console.log(this.state.labels);
+  }
 
   render() {
     return (
       <div>
-         <Bar data={this.state.data} options={this.state.options} />
+         <Bar data={chartData} options={chartOptions} />
       </div>
     );
   }
