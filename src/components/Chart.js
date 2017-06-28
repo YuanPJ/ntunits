@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 const chartData = {
-  labels: [],
+  labels: ['', '', '', '', ''],
         datasets: [{
             label: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
@@ -26,15 +26,15 @@ const chartData = {
         }]
 };
 
-const chartOptions = {
-    scales: {
-        xAxes: [{
-            gridLines: {
-                offsetGridLines: true
-            }
-        }]
-    }
-};
+// const chartOptions = {
+//     scales: {
+//         xAxes: [{
+//             gridLines: {
+//                 offsetGridLines: true
+//             }
+//         }]
+//     }
+// };
 
 export default class BarChart extends Component {
   constructor(props) {
@@ -47,23 +47,20 @@ export default class BarChart extends Component {
   }
 
   componentWillMount() {
-      const labels = this.state.labels;
     // fetch('/api/getQuiz')
     //   .then(res => res.json())
     //   .then(data => this.setState({ data }))
     //   .catch(err => console.log(err));
     // console.log("component will mount");
-    for(let i=0; i<5; i++){
-        labels[i] = this.props.data[i];
+    for (let i = 0; i < 5; i++) {
+        chartData.labels[i] = this.props.data[i];
     }
-    this.setState({ labels });
-    console.log(this.state.labels);
   }
 
   render() {
     return (
       <div>
-         <Bar data={chartData} options={chartOptions} />
+         <Bar data={chartData} />
       </div>
     );
   }
