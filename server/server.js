@@ -2,11 +2,12 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const router = require('./api/route');
 const mongoose = require('mongoose');
+
 const server = express();
 
 server.use(bodyparser.json());
-server.use(express.static(__dirname+'/../public'))
-server.use('/api', router);
+server.use(express.static(__dirname+'/../public'));
+server.use('/api', router)
 
 // server.post('/cookie', (req,res) => {
 //     res.cookie('login', {
@@ -37,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ntunit');
 console.log(`MONGODB_URI = ${process.env.MONGODB_URI}`);
 
 const db = mongoose.connection;
- 
+
 db.on('error', function (err) {
     console.log('connection error', err);
 });

@@ -2,4 +2,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+   background-image:url(./background.png);
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+   height: 100%;
+   width: auto;
+}
+@media (min-width: 480px) {
+  body {
+    background-image:url(./background.png);
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
