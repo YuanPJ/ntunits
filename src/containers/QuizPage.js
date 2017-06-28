@@ -12,11 +12,17 @@ export default class QuizPage extends Component {
     this.state = {
       openDialog: false,
       number: 0,
+<<<<<<< HEAD
       data: {},
+=======
+      data: [{question:"", options:[""]}],
+      user: {userID: "", userName: "", userPicURI: "", friendList: [], answer: [0,0,0,0,0,0,0,0,0,0,0,0,0]}
+>>>>>>> 0bab2beb9a4559aa7d3fc1bda170e9ccb7c7292c
     };
     this.handleClose = this.handleClose.bind(this);
   }
 
+<<<<<<< HEAD
   componentWillMount() {
     fetch('/api/quiz')
       .then(res => res.json())
@@ -26,6 +32,22 @@ export default class QuizPage extends Component {
 
   handleOpen(i) {
     this.setState({ openDialog: true, number: i + 1 });
+=======
+  handleOpen(i) {
+    // console.log(this.props.id)
+    fetch('/api/quiz')
+      .then(res => res.json())
+      .then((quiz) => { this.setState({ data: quiz}); })
+      .catch((err) => { console.log('fetch get quiz error',err); });
+    this.setState({ openDialog: true, number: i+1 });
+    
+    fetch(`/api/user/${this.props.id}`)
+      .then(res => res.json())
+      .then(user => this.setState({user}))
+      .catch(err => {console.log('fetch get user error',err)})
+
+    console.log('handleOpen state',this.state);
+>>>>>>> 0bab2beb9a4559aa7d3fc1bda170e9ccb7c7292c
   }
 
   handleClose() {
@@ -33,6 +55,8 @@ export default class QuizPage extends Component {
   }
 
   render() {
+    console.log('quizpage state',this.state.data);
+    console.log('quizpage props',this.props)
     const n = 13;
     const list = Array.from(Array(n).keys());
     const actions = [
@@ -51,7 +75,7 @@ export default class QuizPage extends Component {
     return (
       <div className="container-fluid">
         <Dialog
-          title="a"
+          title={this.state.data[0].question}
           actions={actions}
           modal={false}
           open={this.state.openDialog}

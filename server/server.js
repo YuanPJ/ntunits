@@ -34,7 +34,7 @@ server.use('/api', router)
 
 //====================================//
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ntunit');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ntunits');
 console.log(`MONGODB_URI = ${process.env.MONGODB_URI}`);
 
 const db = mongoose.connection;
