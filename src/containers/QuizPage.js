@@ -12,7 +12,7 @@ export default class QuizPage extends Component {
     this.state = {
       openDialog: false,
       number: 0,
-      data: [{}],
+      data: [{question:"", options:[""]}],
     };
     this.handleClose = this.handleClose.bind(this);
   }
@@ -20,10 +20,9 @@ export default class QuizPage extends Component {
   handleOpen(i) {
     fetch('/api/quiz')
       .then(res => res.json())
-      .then((quiz) => { console.log(quiz); this.setState({ data: {quiz}}); })
+      .then((quiz) => { console.log(quiz); this.setState({ data: quiz}); })
       .catch((err) => { console.log(err); });
     this.setState({ openDialog: true, number: i+1 });
-    console.log(this.state.data);
   }
 
   handleClose() {
@@ -31,6 +30,7 @@ export default class QuizPage extends Component {
   }
 
   render() {
+    console.log(this.state.data);
     const n = 13;
     const list = Array.from(Array(n).keys());
     const actions = [
@@ -49,7 +49,7 @@ export default class QuizPage extends Component {
     return (
       <div className="container-fluid">
         <Dialog
-          title="a"
+          title={this.state.data[0].question}
           actions={actions}
           modal={false}
           open={this.state.openDialog}
