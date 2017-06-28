@@ -5,7 +5,7 @@ const chartData = {
   labels: ['', '', '', '', ''],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -40,20 +40,18 @@ export default class BarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      labels: ['', '', '', '', ''],
-      options: [],
-      number: this.props.number,
+      data: [],
     };
   }
 
   componentWillMount() {
-    // fetch('/api/getQuiz')
-    //   .then(res => res.json())
-    //   .then(data => this.setState({ data }))
-    //   .catch(err => console.log(err));
-    // console.log("component will mount");
+    fetch(`/api/answer/${this.props.id}`)
+      .then(res => res.json())
+      .then(data => this.setState({ data }))
+      .catch(err => console.log(err));
+    console.log(this.state.data);
     for (let i = 0; i < 5; i++) {
-        chartData.labels[i] = this.props.data[i];
+        chartData.labels[i] = this.props.options[i];
     }
   }
 

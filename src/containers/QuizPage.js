@@ -160,7 +160,7 @@ export default class QuizPage extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <BarChart num={num} data={this.state.data[num].options} />
+          <BarChart id={num} options={this.state.data[num].options} />
         </Dialog>
 
         <div className="row">
