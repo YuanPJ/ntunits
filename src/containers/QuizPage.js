@@ -81,7 +81,7 @@ export default class QuizPage extends Component {
       return;
     }
     const answer = this.state.user.answer;
-    const id = this.state.user.userID;
+    const id = this.props.id;
     for (let i = 0; i < 5; i++) {
       if (this.state.checked[i] === true) {
         answer[this.state.number] = i + 1;
@@ -104,7 +104,7 @@ export default class QuizPage extends Component {
   }
 
   render() {
-    console.log('quizpage state', this.state.data);
+    console.log('quizpage state', this.state);
     console.log('quizpage props', this.props);
     const n = 12;
     const list = Array.from(Array(n).keys());

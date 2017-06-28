@@ -44,6 +44,7 @@ db.on('error', (err) => {
 });
 db.once('open', () => {
   console.log('connected.');
+//   console.log(db.collection())
 });
 //= ================================== =//
 

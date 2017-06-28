@@ -105,7 +105,6 @@ class App extends Component {
         friendList: this.state.friends
       }),
     })
-    
     setTimeout(this.props.setUserState(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends), 1000);
     setTimeout(() => console.log('didLogin', this.props), 2000);
     setTimeout(() => console.log(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends), 2000);

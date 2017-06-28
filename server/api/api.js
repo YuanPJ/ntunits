@@ -4,10 +4,11 @@ module.exports = {
   postUser(req, res) {
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
     User.findOneAndUpdate({ userID: req.body.userID }, req.body, options);
+    console.log('postUser in server', req.body)
   },
   getUser(req, res) {
     const id = req.params.id;
-    User.findById(id, (err, user) => {
+    User.findOne({userID: id}, (err, user) => {
       if (err) console.log(err);
       res.json(user);
       console.log(`getPost ${id}: ${user}`);
@@ -15,7 +16,7 @@ module.exports = {
   },
   putAnswer(req, res) {
     const id = req.params.id;
-    User.findByIdAndUpdate(id, { answer: req.body })
+    User.findOneAndUpdate({userID: id}, { answer: req.body })
         .catch(err => console.log(err));
         // res.json({state: "SUCCESS"});
   },
