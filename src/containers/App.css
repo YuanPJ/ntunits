@@ -36,3 +36,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.FBLogin {
+  text-align: center;
+  color: white;
+  font-size: 200%;
+  position: relative;
+  top: 400px;
+}

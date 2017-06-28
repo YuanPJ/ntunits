@@ -148,7 +148,7 @@ class App extends Component {
   homePage() {
     return (
       <div className="home-page">
-        <div>
+        <div className="FBLogin">
           {this.loginSection()}
         </div>
       </div>
