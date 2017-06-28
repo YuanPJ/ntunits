@@ -91,20 +91,32 @@ export default class QuizPage extends Component {
     for (let i = 0; i < 5; i++) {
       if (this.state.checked[i] === true) {
         answer[this.state.number] = i + 1;
+        fetch(`/api/user/${this.props.id}`, {
+          method: 'PUT',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            question: this.state.number,
+            answer: i+1
+          }),
+        })
+        .catch((err) => { console.log('fetch put answer error', err); });
       }
     }
-    fetch(`/api/user/${this.props.id}`, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        answer,
-      }),
-    })
-      .then(res => res.json())
-      .catch((err) => { console.log('fetch put answer error', err); });
+    // fetch(`/api/user/${this.props.id}`, {
+    //   method: 'PUT',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     answer,
+    //   }),
+    // })
+    //   .then(res => res.json())
+    //   .catch((err) => { console.log('fetch put answer error', err); });
     this.setState({
       openDialog: false,
       openChart: true,
