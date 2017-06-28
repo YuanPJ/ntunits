@@ -49,6 +49,9 @@ class App extends Component {
         version: 'v2.9',
       });
       window.FB.AppEvents.logPageView();
+      window.FB.getLoginStatus(function(response) {
+        console.log('component mount', response)
+      });
       window.FB.Event.subscribe('auth.authResponseChange', this.statusChangeCallback);
     };
     (function(d, s, id){
@@ -75,6 +78,7 @@ class App extends Component {
   }
   didLogin() {
     window.FB.api('/me', (res) => {
+      console.log('didLogin response',res)
       this.setState({
         login: true,
         id: res.id,
@@ -99,6 +103,7 @@ class App extends Component {
     });
   }
   statusChangeCallback(response) {
+    console.log('callback response',response)
     if (response.status === 'connected') {
       this.didLogin();
       // window.location = '/quiz';
