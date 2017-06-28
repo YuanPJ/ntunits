@@ -91,6 +91,20 @@ class App extends Component {
         pictureUrl: res.data.url,
       });
     });
+
+    fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userID: this.state.id,
+        userName: this.state.name,
+        userPicURI: this.state.pictureUrl,
+        friendList: this.state.friends
+      }),
+    })
     
     setTimeout(this.props.setUserState(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends), 1000);
     setTimeout(() => console.log('didLogin', this.props), 2000);

@@ -16,18 +16,18 @@ export default class QuizPage extends Component {
       number: 0,
       checked: [false, false, false, false, false],
       data: [
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
-        { question: '', options: [''] },
+        { question: '', options: [''] }
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
+        // { question: '', options: [''] },
       ],
       user: {
         userID: '',
@@ -87,6 +87,7 @@ export default class QuizPage extends Component {
         answer[this.state.number] = i + 1;
       }
     }
+    console.log('userID', id)
     fetch(`/api/user/${id}`, {
       method: 'PUT',
       headers: {
