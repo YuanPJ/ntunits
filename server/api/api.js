@@ -2,6 +2,7 @@ const User = require('./dbModel');
 
 module.exports = {
   postUser(req, res) {
+    console.log('in the postUser')
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
     User.findOneAndUpdate({ userID: req.body.userID }, req.body, options);
     console.log('postUser in server', req.body)
