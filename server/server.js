@@ -6,17 +6,17 @@ const mongoose = require('mongoose');
 const server = express();
 
 server.use(bodyparser.json());
-server.use(express.static(__dirname+'/../public'));
-server.use('/api', router)
+server.use(express.static(__dirname + '/../public'));
+server.use('/api', router);
 
 // server.post('/cookie', (req,res) => {
 //     res.cookie('login', {
-//         login: req.body.login, 
-//         id: req.body.id, 
-//         name: req.body.name, 
-//         picUrl: req.body.pictureUrl, 
+//         login: req.body.login,
+//         id: req.body.id,
+//         name: req.body.name,
+//         picUrl: req.body.pictureUrl,
 //         friends: req.body.friends
-//       }, 
+//       },
 //       { secure: true });
 // })
 // server.get('/cookie', (req,res) => {
@@ -32,20 +32,20 @@ server.use('/api', router)
 //     })
 // })
 
-//====================================//
+//= ================================== =//
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ntunit');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/ntunits');
 console.log(`MONGODB_URI = ${process.env.MONGODB_URI}`);
 
 const db = mongoose.connection;
 
-db.on('error', function (err) {
-    console.log('connection error', err);
+db.on('error', (err) => {
+  console.log('connection error', err);
 });
-db.once('open', function () {
-    console.log('connected.');
+db.once('open', () => {
+  console.log('connected.');
 });
-//====================================//
+//= ================================== =//
 
 const port = process.env.PORT || 3002;
-server.listen(port, ()=>{console.log(`listening on ${port}...`)});
+server.listen(port, () => { console.log(`listening on ${port}...`); });
