@@ -5,7 +5,7 @@ const chartData = {
   labels: ['', '', '', '', ''],
         datasets: [{
             label: '# of Votes',
-            data: [0, 0, 0, 0, 0],
+            data: data,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -26,6 +26,7 @@ const chartData = {
         }]
 };
 
+const data = [0, 0, 0, 0, 0];
 // const chartOptions = {
 //     scales: {
 //         xAxes: [{
@@ -56,19 +57,19 @@ export default class BarChart extends Component {
 
   updateData() {
     for (let i = 0; i < 5; i++) {
-      chartData.datasets[0].data[i] = 0;
+      data[i] = 0;
     }
     console.log("render", this.state.answer);
     for(let i=0; i<this.state.answer.length; i++){
         switch(this.state.answer[i]){
-            case 1: chartData.datasets[0].data[0] += 1; break;
-            case 2: chartData.datasets[0].data[1] += 1; break;
-            case 3: chartData.datasets[0].data[2] += 1; break;
-            case 4: chartData.datasets[0].data[3] += 1; break;
-            case 5: chartData.datasets[0].data[4] += 1; break;
+            case 1: data[0] += 1; break;
+            case 2: data[1] += 1; break;
+            case 3: data[2] += 1; break;
+            case 4: data[3] += 1; break;
+            case 5: data[4] += 1; break;
         }
     }
-    console.log("data", chartData.datasets[0].data);
+    console.log("data", data);
   }
 
   render() {
