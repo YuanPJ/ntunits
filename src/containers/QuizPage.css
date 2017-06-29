@@ -1,3 +1,9 @@
-.BarChart {
-    width: 70%
+.BarChartdiv {
+    width: 70%;
+    height: 100%;
+    margin: 0px auto;
+}
+
+.BarChart canvas {
+  width: 100%;
 }

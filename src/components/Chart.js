@@ -69,12 +69,26 @@ export default class BarChart extends Component {
     };
   }
 
+  chartOptions() {
+    return {
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 5,
+            beginAtZero: true,
+            stepSize: 1,
+          },
+        }],
+      },
+    };
+  }
+
   render() {
     console.log("render");
     console.log(this.state.data);
     return (
       <div>
-        <Bar data={this.chartData()} redraw={true} />
+        <Bar data={this.chartData()} options={this.chartOptions()} redraw={true} />
       </div>
     );
   }

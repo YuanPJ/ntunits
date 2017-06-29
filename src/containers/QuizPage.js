@@ -8,7 +8,7 @@ import QuizCell from '../components/QuizCell';
 import BarChart from '../components/Chart';
 
 const customContentStyle = {
-  width: '70%',
+  width: '80%',
   maxWidth: 'none',
 };
 
@@ -166,10 +166,11 @@ export default class QuizPage extends Component {
           modal={false}
           open={this.state.openChart}
           onRequestClose={this.handleClose}
+          contentStyle={customContentStyle}
           autoScrollBodyContent={true}
         >
-          <div className="BarChart">
-            <BarChart  id={num} options={this.state.data[num].options} />
+          <div className="BarChartdiv">
+            <BarChart className="BarChart" id={num} options={this.state.data[num].options} />
           </div>
         </Dialog>
 
