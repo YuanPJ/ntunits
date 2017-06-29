@@ -40,7 +40,7 @@ export default class QuizPage extends Component {
         userPicURI: '',
         friendList: [],
         answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-      propAns: 0,
+      propAns: -1,
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
