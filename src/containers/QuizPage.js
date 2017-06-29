@@ -180,7 +180,7 @@ export default class QuizPage extends Component {
           {list.map(i =>
             (<div className="col-xs-6 col-sm-4 col-md-3 nopadding" key={`quizcell-${i}`}>
               <div onClick={() => this.handleOpen(i)}>
-                <QuizCell />
+                <QuizCell id={i} />
               </div>
             </div>),
           )}
