@@ -18,9 +18,16 @@ module.exports = {
           // answer: array
         });
       }
+<<<<<<< HEAD
     });
     console.log('postUser in server', req.body);
     User.find({}, (err, user) => console.log(user));
+=======
+    })
+    console.log('postUser in server', req.body)
+    User.find({}, (err, user)=> console.log(user))
+    res.json({state: "SUCCESS"});
+>>>>>>> 2c238ebe49a306ce3e496968c3eb8df60b8de25c
   },
 
   getUser(req, res) {
@@ -37,6 +44,7 @@ module.exports = {
     let array = [];
     User.findOne({ userID: id }, (err, user) => {
       array = Array.from(user.answer);
+<<<<<<< HEAD
       console.log('original answer array', array);
       array[req.body.question] = req.body.answer;
       console.log('new answer array', array);
@@ -44,6 +52,15 @@ module.exports = {
           .catch(() => console.log(err));
     });
     res.json({ state: 'SUCCESS' });
+=======
+      console.log('original answer array', array)
+      array[req.body.question] = req.body.answer
+      console.log('new answer array', array)
+      User.findOneAndUpdate({userID: id}, { answer: array })
+          .catch(err => console.log(err));
+    })
+    res.json({state: "SUCCESS"});
+>>>>>>> 2c238ebe49a306ce3e496968c3eb8df60b8de25c
   },
 
   getAnswer(req, res) {

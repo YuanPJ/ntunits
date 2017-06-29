@@ -108,9 +108,15 @@ export default class QuizPage extends Component {
           },
           body: JSON.stringify({
             question: this.state.number,
+<<<<<<< HEAD
             answer: i + 1,
           }),
+=======
+            answer: i+1
+          })
+>>>>>>> 2c238ebe49a306ce3e496968c3eb8df60b8de25c
         })
+        .then(res => console.log(res.status))
         .catch((err) => { console.log('fetch put answer error', err); });
       }
     }
