@@ -8,8 +8,8 @@ const UserSchema = new Schema({
   userPicURI: String,
   friendList: [],
   answer: { type: [Number], default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
-});
+},{collection: 'User'});
 
-const User = mongoose.model('post', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

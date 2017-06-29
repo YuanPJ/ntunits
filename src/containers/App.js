@@ -24,18 +24,18 @@ const setUserState = (login, id, name, pictureUrl, friends) => ({
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = this.props.state;
-    // this.state = {
-    //   login: false,
-    //   id: 0,
-    //   name: '',
-    //   pictureUrl: '',
-    //   friends: []
-    // };
+    // this.state = this.props.state;
+    this.state = {
+      login: false,
+      id: '',
+      name: '',
+      pictureUrl: '',
+      friends: []
+    };
     // this.setState(
       // this.props,
     // );
-    console.log('construct', this.props);
+    // console.log('construct', this.props);
     this.getFriends = this.getFriends.bind(this);
     this.didLogin = this.didLogin.bind(this);
     this.didNotLogin = this.didNotLogin.bind(this);
@@ -94,22 +94,37 @@ class App extends Component {
       });
     });
 
-    fetch('/api/user', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        userID: this.state.id,
-        userName: this.state.name,
-        userPicURI: this.state.pictureUrl,
-        friendList: this.state.friends
-      }),
-    })
+    // fetch('/api/user', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify({
+    //     userID: this.state.id,
+    //     userName: this.state.name,
+    //     userPicURI: this.state.pictureUrl,
+    //     friendList: this.state.friends
+    //   }),
+    // })
     setTimeout(this.props.setUserState(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends), 1000);
-    setTimeout(() => console.log('didLogin', this.props), 2000);
-    setTimeout(() => console.log(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends), 2000);
+    // setTimeout(() => console.log('didLogin', this.props), 2000);
+    setTimeout(() => {
+      console.log(this.state.login, this.state.id, this.state.name, this.state.pictureUrl, this.state.friends);
+      fetch('/api/user', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userID: this.state.id,
+          userName: this.state.name,
+          userPicURI: this.state.pictureUrl,
+          friendList: this.state.friends
+        }),
+      })
+    }, 2000);
   }
   didNotLogin() {
     this.props.setState({
@@ -176,7 +191,26 @@ class App extends Component {
   //     friends={this.state.friends}/>
   // }
   render() {
+<<<<<<< HEAD
     console.log(this.state);
+=======
+    // console.log(this.state)
+    // if (this.state.id !== '' && this.state.name !== '' && this.state.pictureUrl !== ''){
+    //     fetch('/api/user', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       userID: this.state.id,
+    //       userName: this.state.name,
+    //       userPicURI: this.state.pictureUrl,
+    //       friendList: this.state.friends
+    //     }),
+    //   })
+    // }
+>>>>>>> master
     const renderQuizPage = () => {
       return <QuizPage       
         login={this.state.login}
