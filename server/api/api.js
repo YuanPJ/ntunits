@@ -19,9 +19,9 @@ module.exports = {
         })
       }
     })
-
     console.log('postUser in server', req.body)
     User.find({}, (err, user)=> console.log(user))
+    res.json({state: "SUCCESS"});
   },
   getUser(req, res) {
     const id = req.params.id;
@@ -42,8 +42,7 @@ module.exports = {
       User.findOneAndUpdate({userID: id}, { answer: array })
           .catch(err => console.log(err));
     })
-
-        // res.json({state: "SUCCESS"});
+    res.json({state: "SUCCESS"});
   },
   getAnswer(req, res) {
     const id = req.params.id;

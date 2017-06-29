@@ -109,8 +109,9 @@ export default class QuizPage extends Component {
           body: JSON.stringify({
             question: this.state.number,
             answer: i+1
-          }),
+          })
         })
+        .then(res => console.log(res.status))
         .catch((err) => { console.log('fetch put answer error', err); });
       }
     }
