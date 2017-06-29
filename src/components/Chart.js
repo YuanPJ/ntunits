@@ -39,7 +39,7 @@ export default class BarChart extends Component {
         case 5: data[4] += 1; break;
       }
     }
-    if (this.props.ans >= 0) data[this.props.ans] += 1;
+    if (this.props.ans > 0) data[this.props.ans - 1] += 1;
     this.setState({ data });
   }
 
