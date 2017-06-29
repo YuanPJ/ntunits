@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './QuizCell.css';
-import cell1 from '../cell1.png';
-import cell2 from '../cell2.png';
-import cell3 from '../cell3.png';
-import cell4 from '../cell4.png';
-import cell5 from '../cell5.png';
-import cell6 from '../cell6.png';
-import cell7 from '../cell7.png';
-import cell8 from '../cell8.png';
-import cell9 from '../cell9.png';
-import cell10 from '../cell10.png';
-import cell11 from '../cell11.png';
-import cell12 from '../cell12.png';
+import cell1 from '../images/cell1.png';
+import cell2 from '../images/cell2.png';
+import cell3 from '../images/cell3.png';
+import cell4 from '../images/cell4.png';
+import cell5 from '../images/cell5.png';
+import cell6 from '../images/cell6.png';
+import cell7 from '../images/cell7.png';
+import cell8 from '../images/cell8.png';
+import cell9 from '../images/cell9.png';
+import cell10 from '../images/cell10.png';
+import cell11 from '../images/cell11.png';
+import cell12 from '../images/cell12.png';
 
 export default class QuizCell extends Component {
   constructor(props) {
@@ -35,6 +34,6 @@ export default class QuizCell extends Component {
       case 9: return (<div> <img src={cell10} className="img-responsive" alt="" /> </div>);
       case 10: return (<div> <img src={cell11} className="img-responsive" alt="" /> </div>);
       case 11: return (<div> <img src={cell12} className="img-responsive" alt="" /> </div>);
-      }
+    }
   }
 }
