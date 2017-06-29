@@ -40,6 +40,13 @@ export default class QuizPage extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    fetch(`/api/user/${this.props.id}`)
+      .then(res => res.json())
+      .then(user => this.setState({ user }))
+      .catch((err) => { console.log('fetch get user error', err); });
+  }
+
   handleOpen(i) {
     fetch('/api/quiz')
       .then(res => res.json())
@@ -50,10 +57,6 @@ export default class QuizPage extends Component {
     } else {
       this.setState({ openChart: true, number: i });
     }
-    fetch(`/api/user/${this.props.id}`)
-      .then(res => res.json())
-      .then(user => this.setState({ user }))
-      .catch((err) => { console.log('fetch get user error', err); });
     console.log('handleOpen state', this.state);
   }
 

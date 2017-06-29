@@ -191,9 +191,6 @@ class App extends Component {
   //     friends={this.state.friends}/>
   // }
   render() {
-<<<<<<< HEAD
-    console.log(this.state);
-=======
     // console.log(this.state)
     // if (this.state.id !== '' && this.state.name !== '' && this.state.pictureUrl !== ''){
     //     fetch('/api/user', {
@@ -210,7 +207,6 @@ class App extends Component {
     //     }),
     //   })
     // }
->>>>>>> master
     const renderQuizPage = () => {
       return <QuizPage       
         login={this.state.login}
