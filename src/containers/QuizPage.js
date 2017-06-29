@@ -40,6 +40,7 @@ export default class QuizPage extends Component {
         userPicURI: '',
         friendList: [],
         answer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+      propAns: 0
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -98,6 +99,7 @@ export default class QuizPage extends Component {
     for (let i = 0; i < 5; i++) {
       if (this.state.checked[i] === true) {
         answer[this.state.number] = i + 1;
+        this.state.propAns = i+1;
         fetch(`/api/user/${this.props.id}`, {
           method: 'PUT',
           headers: {
@@ -170,7 +172,7 @@ export default class QuizPage extends Component {
           autoScrollBodyContent={true}
         >
           <div className="BarChartdiv">
-            <BarChart className="BarChart" id={num} options={this.state.data[num].options} />
+            <BarChart className="BarChart" id={num} options={this.state.data[num].options} ans={this.state.propAns} />
           </div>
         </Dialog>
 
