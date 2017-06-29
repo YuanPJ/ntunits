@@ -7,6 +7,11 @@ import './QuizPage.css';
 import QuizCell from '../components/QuizCell';
 import BarChart from '../components/Chart';
 
+const customContentStyle = {
+  width: '70%',
+  maxWidth: 'none',
+};
+
 export default class QuizPage extends Component {
   constructor(props) {
     super(props);
@@ -45,13 +50,13 @@ export default class QuizPage extends Component {
       .then(res => res.json())
       .then(user => this.setState({ user }))
       .catch((err) => { console.log('fetch get user error', err); });
-  }
-
-  handleOpen(i) {
     fetch('/api/quiz')
       .then(res => res.json())
       .then((quiz) => { this.setState({ data: quiz }); })
       .catch((err) => { console.log('fetch get quiz error', err); });
+  }
+
+  handleOpen(i) {
     if (this.state.user.answer[i] === 0) {
       this.setState({ openDialog: true, number: i });
     } else {
@@ -142,6 +147,7 @@ export default class QuizPage extends Component {
           actions={actions}
           modal={false}
           open={this.state.openDialog}
+          contentStyle={customContentStyle}
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
@@ -162,7 +168,9 @@ export default class QuizPage extends Component {
           onRequestClose={this.handleClose}
           autoScrollBodyContent={true}
         >
-          <BarChart id={num} options={this.state.data[num].options} />
+          <div className="BarChart">
+            <BarChart  id={num} options={this.state.data[num].options} />
+          </div>
         </Dialog>
 
         <div className="row">
