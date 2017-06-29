@@ -7,7 +7,7 @@ const UserSchema = new Schema({
   userName: String,
   userPicURI: String,
   friendList: [],
-  answer: { type: [Number], default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
+  answer: { type: [Number], default: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0] },
 },{collection: 'User'});
 
 const User = mongoose.model('User', UserSchema);
