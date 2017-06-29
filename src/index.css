@@ -10,7 +10,7 @@ body {
 }
 @media (min-width: 480px) {
   body {
-    background-image:url(./background4.png);
+    background-image:url(./background4-2.png);
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
