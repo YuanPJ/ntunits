@@ -89,7 +89,6 @@ export default class QuizPage extends Component {
       alert('you must choose one!');
       return;
     }
-
     const answer = this.state.user.answer;
     for (let i = 0; i < 5; i++) {
       if (this.state.checked[i] === true) {
@@ -108,18 +107,6 @@ export default class QuizPage extends Component {
         .catch((err) => { console.log('fetch put answer error', err); });
       }
     }
-    // fetch(`/api/user/${this.props.id}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     answer,
-    //   }),
-    // })
-    //   .then(res => res.json())
-    //   .catch((err) => { console.log('fetch put answer error', err); });
     this.setState({
       openDialog: false,
       openChart: true,

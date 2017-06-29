@@ -5,7 +5,7 @@ const chartData = {
   labels: ['', '', '', '', ''],
         datasets: [{
             label: '# of Votes',
-            data: [],
+            data: [0, 0, 0, 0, 0],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -40,22 +40,39 @@ export default class BarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: [],
+      answer: [],
     };
   }
 
   componentWillMount() {
     fetch(`/api/answer/${this.props.id}`)
       .then(res => res.json())
-      .then(data => this.setState({ data }))
+      .then(data => { this.setState({ answer: data.answer }); })
       .catch(err => console.log(err));
-    console.log(this.state.data);
     for (let i = 0; i < 5; i++) {
         chartData.labels[i] = this.props.options[i];
     }
   }
 
+  updateData() {
+    for (let i = 0; i < 5; i++) {
+      chartData.datasets[0].data[i] = 0;
+    }
+    console.log("render", this.state.answer);
+    for(let i=0; i<this.state.answer.length; i++){
+        switch(this.state.answer[i]){
+            case 1: chartData.datasets[0].data[0] += 1; break;
+            case 2: chartData.datasets[0].data[1] += 1; break;
+            case 3: chartData.datasets[0].data[2] += 1; break;
+            case 4: chartData.datasets[0].data[3] += 1; break;
+            case 5: chartData.datasets[0].data[4] += 1; break;
+        }
+    }
+    console.log("data", chartData.datasets[0].data);
+  }
+
   render() {
+    this.updateData();
     return (
       <div>
          <Bar data={chartData} />
